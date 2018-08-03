@@ -81,7 +81,7 @@ def checkMagazine(magazine, note):
     for item in note:
         try:
             dict[item]-=1
-            if dict[item] < -1:
+            if dict[item] < 0:
                 flag = "No"
         except:
             flag = "No"
