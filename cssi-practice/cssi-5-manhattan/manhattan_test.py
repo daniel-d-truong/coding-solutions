@@ -20,6 +20,7 @@ def test_meeting_point(coordinates, best_candidate):
         best_y2 >= best_candidate[1] >= best_y1):
         return True
     else:
+
         return False
 
 def create_random_coords(people_count, grid_size = (10000, 10000)):
