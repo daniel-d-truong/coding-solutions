@@ -1,5 +1,4 @@
 class Board:
-
     WIN = 1
     CONTINUE = 0
     DRAW = -1
@@ -17,25 +16,25 @@ class Board:
         self.anti_diag = [[0 for i in range(Board.PLAYERS)] for i in range(1)]
         self.moves_done = []
         self.moves = 0
-        # print (self.board_list)
 
     def update_and_checks(self, structure, loc, player):
         structure[loc][player-1]+=1
         return structure[loc][player-1] == Board.SIZE
 
     def valid_move(self, loc_coord):
-        if loc_coord in self.moves_done:
-            return False
+        if loc_coord in self.moves_done: return False
         self.moves_done.append(loc_coord)
         return True
 
     # accepts a new move from the player
     # returns 0 --> no winner, game continues; 1 --> winning move, game over; -1 --> no winner, no moves, game is a draw
     def player_move(self, x, y, player):
+        if player not in range(1, Board.PLAYERS+1):
+            raise BaseException("Invalid Player")
         if not self.valid_move( (x,y) ):
-            print ("Invalid Move")
-            return Board.CONTINUE
+            raise BaseException("Move is already occupied")
 
+        print ("Valid Move at (%d, %d) by player %d" % (x, y, player) )
         if self.update_and_checks(self.rows, x, player): return Board.WIN
         if self.update_and_checks(self.columns, y, player): return Board.WIN
         if x == y and self.update_and_checks(self.diag, 0, player): return Board.WIN
